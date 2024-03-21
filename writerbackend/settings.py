@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     "debug_toolbar",
 ]
 
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True  # For development only, restrict in production
+
 # Django REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
