@@ -29,8 +29,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 ENV_ALLOWED_HOSTS = env("ENV_ALLOWED_HOSTS", default="localhost")
-if ENV_ALLOWED_HOSTS:
-    ALLOWED_HOSTS = [ ENV_ALLOWED_HOSTS ]
+# print(ENV_ALLOWED_HOSTS)
+# if ENV_ALLOWED_HOSTS:
+#     ALLOWED_HOSTS = [ ENV_ALLOWED_HOSTS ]
+
 
 # Application definition
 
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_spectacular',
     'accounts.apps.AccountsConfig',
+    'core.apps.CoreConfig',
     "debug_toolbar",
 ]
 
