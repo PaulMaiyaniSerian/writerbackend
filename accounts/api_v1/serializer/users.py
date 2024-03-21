@@ -9,5 +9,5 @@ class UserSerializer(ModelSerializer):
         model = User
         fields = [
             'id', 'username', 'email', 'is_active', 'is_staff', 'is_superuser',
-            'first_name', 'last_name', 'is_writer', 'is_admin', 'is_client
+            'first_name', 'last_name', 'is_writer', 'is_admin', 'is_client'
         ]

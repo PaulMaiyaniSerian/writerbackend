@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from drf_spectacular.utils import extend_schema
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from accounts.api_v1.serializer.users import UserSerializer
@@ -35,9 +36,48 @@ class UserViewSet(ModelViewSet):
             user.save()
 
     # action to list users with is_writer=True`
-    @action(detail=False, methods=['get'], url_path='writers', url_name='writers')
+    @extend_schema(
+        request=UserSerializer,
+        responses=UserSerializer(many=True),
+        summary="list writers"
+    )
+    @action(detail=False, methods=['get'], url_path='list-writers', url_name='writers')
     def list_writers(self, request, *args, **kwargs):
         queryset = self.get_queryset().filter(is_writer=True)
+        # apply pagination
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    # action to list users with is_admin=True`
+    @extend_schema(
+        request=UserSerializer,
+        responses=UserSerializer(many=True),
+        summary="list admins"
+    )
+    @action(detail=False, methods=['get'], url_path='list-admins', url_name='admins')
+    def list_admins(self, request, *args, **kwargs):
+        queryset = self.get_queryset().filter(is_admin=True)
+        # apply pagination
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    # action to list users with is_client=True`
+    @extend_schema(
+        request=UserSerializer,
+        responses=UserSerializer(many=True),
+        summary="list clients"
+    )
+    @action(detail=False, methods=['get'], url_path='list-clients', url_name='clients')
+    def list_clients(self, request, *args, **kwargs):
+        queryset = self.get_queryset().filter(is_client=True)
         # apply pagination
         page = self.paginate_queryset(queryset)
         if page is not None:
