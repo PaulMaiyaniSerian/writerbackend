@@ -3,7 +3,6 @@ from django_filters.rest_framework.backends import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
-from accounts.api_v1.serializer.users import UserSerializer
 from core.api_v1.filters.orders import OrderFilter
 from core.api_v1.serializers.orders import OrderSerializer
 from core.models import Order
