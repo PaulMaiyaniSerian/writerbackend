@@ -35,6 +35,7 @@ urlpatterns = [
     path('api/work-types/', include('core.api_v1.urls.work_type')),
     path('api/academic-levels/', include('core.api_v1.urls.academic_levels')),
     path('api/order-messages/', include('core.api_v1.urls.order_message')),
+    path('api/order-files/', include('core.api_v1.urls.order_files')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
