@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: schoolbackend:v1
+    image: writerbackend:v1
     environment:
       - PORT=8020
     env_file:

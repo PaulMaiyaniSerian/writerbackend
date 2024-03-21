@@ -3,3 +3,4 @@ djangorestframework-simplejwt>=4.7.2
 django-cors-headers>=3.7.0
 drf-spectacular
 django-debug-toolbar==4.3.0
+gunicorn==21.2.0
