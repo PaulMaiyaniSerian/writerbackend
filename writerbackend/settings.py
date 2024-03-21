@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from datetime import timedelta
+import environ
 from pathlib import Path
+
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,6 +28,9 @@ SECRET_KEY = "django-insecure-6b=*b_aqu_3%9q)mjnmk@nsz6-6ve81oy*=d2=nqv__wqz@!w_
 DEBUG = True
 
 ALLOWED_HOSTS = []
+ENV_ALLOWED_HOSTS = env("ENV_ALLOWED_HOSTS", default="localhost")
+if ENV_ALLOWED_HOSTS:
+    ALLOWED_HOSTS = [ ENV_ALLOWED_HOSTS ]
 
 # Application definition
 
