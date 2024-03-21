@@ -2,9 +2,14 @@ from django.contrib.auth import get_user_model
 from drf_spectacular.utils import extend_schema
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
+
+from accounts.api_v1.filters.users import UserFilters
 from accounts.api_v1.serializer.users import UserSerializer
 from pagination import StandardResultsSetPagination
 from rest_framework.response import Response
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 User = get_user_model()
 
@@ -12,6 +17,10 @@ User = get_user_model()
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    pagination_class = StandardResultsSetPagination
+
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_class = UserFilters
     pagination_class = StandardResultsSetPagination
 
     filter_fields = ('username', 'email', 'is_active', 'is_staff', 'is_superuser')
